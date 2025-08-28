@@ -172,6 +172,8 @@ class TextToNumTest(unittest.TestCase):
 
 	def test_hundred_thousand(self):
 		self.assertEqual(text_to_num('one hundred thousand'), 100000)
+		self.assertEqual(text_to_num('five hundred thousand'), 500000)
+		self.assertEqual(text_to_num('fifteen hundred thousand'), 1500000)
 
 if __name__ == '__main__':
 	unittest.main()
