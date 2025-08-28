@@ -224,5 +224,9 @@ class TextToNumTest(unittest.TestCase):
 			), 1):
 				self.assertEqual(text_to_num(f'{tens} {ones} million'), (i * 10 + j) * 1000000)
 
+	def test_compound_millions(self):
+		self.assertEqual(text_to_num('one million five thousand three hundred one'), 1005301)
+		self.assertEqual(text_to_num('ten million one'), 10000001)
+
 if __name__ == '__main__':
 	unittest.main()
