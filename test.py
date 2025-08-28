@@ -181,5 +181,48 @@ class TextToNumTest(unittest.TestCase):
 		self.assertEqual(text_to_num('one thousand three hundred fifty'), 1350)
 		self.assertEqual(text_to_num('twenty five thousand eight hundred ninety three'), 25893)
 
+	def test_millions(self):
+		self.assertEqual(text_to_num('one millon'), 1000000)
+		self.assertEqual(text_to_num('two millon'), 2000000)
+		self.assertEqual(text_to_num('three millon'), 3000000)
+		self.assertEqual(text_to_num('four millon'), 4000000)
+		self.assertEqual(text_to_num('five millon'), 5000000)
+		self.assertEqual(text_to_num('six millon'), 6000000)
+		self.assertEqual(text_to_num('seven millon'), 7000000)
+		self.assertEqual(text_to_num('eight millon'), 8000000)
+		self.assertEqual(text_to_num('nine millon'), 9000000)
+		self.assertEqual(text_to_num('ten millon'), 10000000)
+		self.assertEqual(text_to_num('eleven millon'), 11000000)
+		self.assertEqual(text_to_num('twelve millon'), 12000000)
+		self.assertEqual(text_to_num('thirteen millon'), 13000000)
+		self.assertEqual(text_to_num('fourteen millon'), 14000000)
+		self.assertEqual(text_to_num('fifteen millon'), 15000000)
+		self.assertEqual(text_to_num('sixteen millon'), 16000000)
+		self.assertEqual(text_to_num('seventeen millon'), 17000000)
+		self.assertEqual(text_to_num('eighteen millon'), 18000000)
+		self.assertEqual(text_to_num('nineteen millon'), 19000000)
+		for i, tens in enumerate((
+			'twenty',
+			'thirty',
+			'fourty',
+			'fifty',
+			'sixty',
+			'seventy',
+			'eighty',
+			'ninety',
+		), 2):
+			for j, ones in enumerate((
+				'one',
+				'two',
+				'three',
+				'four',
+				'five',
+				'six',
+				'seven',
+				'eight',
+				'nine',
+			), 1):
+				self.assertEqual(text_to_num(f'{tens} {ones} millon'), (i * 10 + j) * 1000000)
+
 if __name__ == '__main__':
 	unittest.main()
