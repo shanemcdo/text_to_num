@@ -180,6 +180,7 @@ class TextToNumTest(unittest.TestCase):
 	def test_compound_thousands(self):
 		self.assertEqual(text_to_num('one thousand three hundred fifty'), 1350)
 		self.assertEqual(text_to_num('twenty five thousand eight hundred ninety three'), 25893)
+		self.assertEqual(text_to_num('one hundred one thousand'), 100000);
 
 	def test_millions(self):
 		self.assertEqual(text_to_num('one million'), 1000000)
