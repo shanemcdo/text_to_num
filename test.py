@@ -84,5 +84,48 @@ class TextToNumTest(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			text_to_num('twenty twenty')
 
+	def test_hundreds(self):
+		self.assertEqual(text_to_num('one hundred'), 100)
+		self.assertEqual(text_to_num('two hundred'), 200)
+		self.assertEqual(text_to_num('three hundred'), 300)
+		self.assertEqual(text_to_num('four hundred'), 400)
+		self.assertEqual(text_to_num('five hundred'), 500)
+		self.assertEqual(text_to_num('six hundred'), 600)
+		self.assertEqual(text_to_num('seven hundred'), 700)
+		self.assertEqual(text_to_num('eight hundred'), 800)
+		self.assertEqual(text_to_num('nine hundred'), 900)
+		self.assertEqual(text_to_num('ten hundred'), 1000)
+		self.assertEqual(text_to_num('eleven hundred'), 1100)
+		self.assertEqual(text_to_num('twelve hundred'), 1200)
+		self.assertEqual(text_to_num('thirteen hundred'), 1300)
+		self.assertEqual(text_to_num('fourteen hundred'), 1400)
+		self.assertEqual(text_to_num('fifteen hundred'), 1500)
+		self.assertEqual(text_to_num('sixteen hundred'), 1600)
+		self.assertEqual(text_to_num('seventeen hundred'), 1700)
+		self.assertEqual(text_to_num('eighteen hundred'), 1800)
+		self.assertEqual(text_to_num('nineteen hundred'), 1900)
+		for i, tens in enumerate((
+			'twenty',
+			'thirty',
+			'fourty',
+			'fifty',
+			'sixty',
+			'seventy',
+			'eighty',
+			'ninety',
+		), 2):
+			for j, ones in enumerate((
+				'one',
+				'two',
+				'three',
+				'four',
+				'five',
+				'six',
+				'seven',
+				'eight',
+				'nine',
+			), 1):
+				self.assertEqual(text_to_num(f'{tens} {ones} hundred'), (i * 10 + j) * 100)
+
 if __name__ == '__main__':
 	unittest.main()
