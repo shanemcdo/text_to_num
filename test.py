@@ -83,6 +83,8 @@ class TextToNumTest(unittest.TestCase):
 			text_to_num('nine twenty')
 		with self.assertRaises(ValueError):
 			text_to_num('twenty twenty')
+		with self.assertRaises(ValueError):
+			text_to_num('one thousand hundred')
 
 	def test_hundreds(self):
 		self.assertEqual(text_to_num('one hundred'), 100)
