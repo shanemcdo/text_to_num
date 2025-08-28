@@ -36,11 +36,16 @@ tens_table = {
 	'ninety': 90,
 }
 
+multiplier_table = {
+	'hundred': 100,
+}
+
 
 class State(Enum):
 	START = 1
 	ONES = 2
 	TENS = 3
+	MULT = 4
 
 def text_to_num(text: str) -> int:
 	'''
@@ -60,13 +65,25 @@ def text_to_num(text: str) -> int:
 			elif word in tens_table:
 				result = tens_table[word]
 				state = State.TENS
+			else:
+				raise ValueError('unexpected word')
 		elif state == State.ONES:
 			if word in ones_table or word in tens_table:
 				raise ValueError('Malformed number')
+			elif word in multiplier_table:
+				result *= multiplier_table[word]
+				state = State.MULT
+			else:
+				raise ValueError('unexpected word')
 		elif state == State.TENS:
 			if word in ones_table:
 				result += ones_table[word]
 				state = State.ONES
 			elif word in tens_table:
 				raise ValueError('Malformed number')
+			elif word in multiplier_table:
+				result *= multiplier_table[word]
+				state = State.MULT
+			else:
+				raise ValueError('unexpected word')
 	return result
