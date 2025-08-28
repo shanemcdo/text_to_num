@@ -58,6 +58,7 @@ def text_to_num(text: str) -> int:
 	'''
 	result = 0
 	state = State.START
+	prev_mult = None
 	for word in text.lower().split():
 		if state == State.START:
 			if word in ones_table:
@@ -72,7 +73,8 @@ def text_to_num(text: str) -> int:
 			if word in ones_table or word in tens_table:
 				raise ValueError('Malformed number')
 			elif word in multiplier_table:
-				result *= multiplier_table[word]
+				prev_mult = multiplier_table[word]
+				result *= prev_mult
 				state = State.MULT
 			else:
 				raise ValueError('unexpected word')
@@ -83,8 +85,24 @@ def text_to_num(text: str) -> int:
 			elif word in tens_table:
 				raise ValueError('Malformed number')
 			elif word in multiplier_table:
-				result *= multiplier_table[word]
+				prev_mult = multiplier_table[word]
+				result *= prev_mult
 				state = State.MULT
+			else:
+				raise ValueError('unexpected word')
+		elif state == State.MULT:
+			if word in ones_table:
+				result += ones_table[word]
+				state = State.ONES
+			elif word in tens_table:
+				result += tens_table[word]
+				state = State.TENS
+			elif word in multiplier_table:
+				mult = multiplier_table[word]
+				if prev_mult > mult:
+					raise ValueError('Malformed number')
+				prev_mult = mult
+				result *= prev_mult
 			else:
 				raise ValueError('unexpected word')
 		else:
