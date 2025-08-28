@@ -170,5 +170,8 @@ class TextToNumTest(unittest.TestCase):
 			), 1):
 				self.assertEqual(text_to_num(f'{tens} {ones} thousand'), (i * 10 + j) * 1000)
 
+	def test_hundred_thousand(self):
+		self.assertEqual(text_to_num('one hundred thousand'), 100000)
+
 if __name__ == '__main__':
 	unittest.main()
