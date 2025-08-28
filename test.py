@@ -38,5 +38,15 @@ class TextToNumTest(unittest.TestCase):
 	def test_caps(self):
 		self.assertEqual(text_to_num('THREE'), 3)
 
+	def test_by_10(self):
+		self.assertEqual(text_to_num('ten'), 10)
+		self.assertEqual(text_to_num('twenty'), 20)
+		self.assertEqual(text_to_num('thirty'), 30)
+		self.assertEqual(text_to_num('fourty'), 40)
+		self.assertEqual(text_to_num('fifty'), 50)
+		self.assertEqual(text_to_num('sixty'), 60)
+		self.assertEqual(text_to_num('seventy'), 70)
+		self.assertEqual(text_to_num('eighty'), 80)
+		self.assertEqual(text_to_num('ninety'), 90)
 if __name__ == '__main__':
 	unittest.main()
