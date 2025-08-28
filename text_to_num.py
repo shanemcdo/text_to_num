@@ -56,6 +56,7 @@ def text_to_num(text: str) -> int:
 		case does not matter
 	:return: the number represented by the text
 	'''
+	sub_result = 0
 	result = 0
 	state = State.START
 	prev_mult = None
@@ -107,4 +108,5 @@ def text_to_num(text: str) -> int:
 				raise ValueError('unexpected word')
 		else:
 			raise ValueError('unexpected state')
+	result += sub_result
 	return result
