@@ -63,10 +63,10 @@ def text_to_num(text: str) -> int:
 	for word in text.lower().split():
 		if state == State.START:
 			if word in ones_table:
-				result = ones_table[word]
+				sub_result = ones_table[word]
 				state = State.ONES
 			elif word in tens_table:
-				result = tens_table[word]
+				sub_result = tens_table[word]
 				state = State.TENS
 			else:
 				raise ValueError('unexpected word')
@@ -75,28 +75,32 @@ def text_to_num(text: str) -> int:
 				raise ValueError('Malformed number: a ones or tens places cannot follow a ones places')
 			elif word in multiplier_table:
 				prev_mult = multiplier_table[word]
-				result *= prev_mult
+				sub_result *= prev_mult
 				state = State.MULT
+				result += sub_result
+				sub_result = 0
 			else:
 				raise ValueError('unexpected word')
 		elif state == State.TENS:
 			if word in ones_table:
-				result += ones_table[word]
+				sub_result += ones_table[word]
 				state = State.ONES
 			elif word in tens_table:
 				raise ValueError('Malformed number: a tens place (twenty) cannot follow another tens place')
 			elif word in multiplier_table:
 				prev_mult = multiplier_table[word]
-				result *= prev_mult
+				sub_result *= prev_mult
 				state = State.MULT
+				result += sub_result
+				sub_result = 0
 			else:
 				raise ValueError('unexpected word')
 		elif state == State.MULT:
 			if word in ones_table:
-				result += ones_table[word]
+				sub_result += ones_table[word]
 				state = State.ONES
 			elif word in tens_table:
-				result += tens_table[word]
+				sub_result += tens_table[word]
 				state = State.TENS
 			elif word in multiplier_table:
 				mult = multiplier_table[word]
