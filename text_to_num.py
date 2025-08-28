@@ -109,6 +109,8 @@ def text_to_num(text: str) -> int:
 					raise ValueError('Malformed number: multipliers (e.g.) hundred cannot be bigger than the previous mulitplier')
 				prev_mult = mult
 				result *= prev_mult
+			elif word == 'and':
+				continue
 			else:
 				raise ValueError('unexpected word')
 		else:

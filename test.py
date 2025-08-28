@@ -228,5 +228,8 @@ class TextToNumTest(unittest.TestCase):
 		self.assertEqual(text_to_num('one million five thousand three hundred one'), 1005301)
 		self.assertEqual(text_to_num('ten million one'), 10000001)
 
+	def test_and(self):
+		self.assertEqual(text_to_num('one million and one hundred and one thousand and one hundred and one'), 1101101)
+
 if __name__ == '__main__':
 	unittest.main()
