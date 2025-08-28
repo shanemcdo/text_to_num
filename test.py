@@ -73,5 +73,13 @@ class TextToNumTest(unittest.TestCase):
 			), 1):
 				self.assertEqual(text_to_num(f'{tens} {ones}'), i * 10 + j)
 
+	def test_malformed(self):
+		with self.assertRaises(ValueError):
+			text_to_num('one one')
+		with self.assertRaises(ValueError):
+			text_to_num('one ninety')
+		with self.assertRaises(ValueError):
+			text_to_num('nine twenty')
+
 if __name__ == '__main__':
 	unittest.main()
