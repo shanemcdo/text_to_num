@@ -9,7 +9,7 @@ class TextToNumTest(unittest.TestCase):
 	def test_exists(self):
 		text_to_num('three')
 
-	def test_single_digit(self):
+	def test_lte_20(self):
 		for i, word in enumerate((
 			'zero',
 			'one',
@@ -21,6 +21,17 @@ class TextToNumTest(unittest.TestCase):
 			'seven',
 			'eight',
 			'nine',
+			'ten',
+			'eleven',
+			'twelve',
+			'thirteen',
+			'fourteen',
+			'fifteen',
+			'sixteen',
+			'seventeen',
+			'eighteen',
+			'nineteen',
+			'twenty',
 		)):
 			self.assertEqual(text_to_num(word), i)
 
