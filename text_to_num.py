@@ -39,5 +39,7 @@ def text_to_num(text: str) -> int:
 		case does not matter
 	:return: the number represented by the text
 	'''
-	text = text.lower()
-	return text_num_table[text]
+	result = 0
+	for word in text.lower().split():
+		result += text_num_table[word]
+	return result
