@@ -127,5 +127,48 @@ class TextToNumTest(unittest.TestCase):
 			), 1):
 				self.assertEqual(text_to_num(f'{tens} {ones} hundred'), (i * 10 + j) * 100)
 
+	def test_thousands(self):
+		self.assertEqual(text_to_num('one thousand'), 1000)
+		self.assertEqual(text_to_num('two thousand'), 2000)
+		self.assertEqual(text_to_num('three thousand'), 3000)
+		self.assertEqual(text_to_num('four thousand'), 4000)
+		self.assertEqual(text_to_num('five thousand'), 5000)
+		self.assertEqual(text_to_num('six thousand'), 6000)
+		self.assertEqual(text_to_num('seven thousand'), 7000)
+		self.assertEqual(text_to_num('eight thousand'), 8000)
+		self.assertEqual(text_to_num('nine thousand'), 9000)
+		self.assertEqual(text_to_num('ten thousand'), 10000)
+		self.assertEqual(text_to_num('eleven thousand'), 11000)
+		self.assertEqual(text_to_num('twelve thousand'), 12000)
+		self.assertEqual(text_to_num('thirteen thousand'), 13000)
+		self.assertEqual(text_to_num('fourteen thousand'), 14000)
+		self.assertEqual(text_to_num('fifteen thousand'), 15000)
+		self.assertEqual(text_to_num('sixteen thousand'), 16000)
+		self.assertEqual(text_to_num('seventeen thousand'), 17000)
+		self.assertEqual(text_to_num('eighteen thousand'), 18000)
+		self.assertEqual(text_to_num('nineteen thousand'), 19000)
+		for i, tens in enumerate((
+			'twenty',
+			'thirty',
+			'fourty',
+			'fifty',
+			'sixty',
+			'seventy',
+			'eighty',
+			'ninety',
+		), 2):
+			for j, ones in enumerate((
+				'one',
+				'two',
+				'three',
+				'four',
+				'five',
+				'six',
+				'seven',
+				'eight',
+				'nine',
+			), 1):
+				self.assertEqual(text_to_num(f'{tens} {ones} thousand'), (i * 10 + j) * 1000)
+
 if __name__ == '__main__':
 	unittest.main()
