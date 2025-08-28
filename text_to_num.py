@@ -39,6 +39,7 @@ tens_table = {
 multiplier_table = {
 	'hundred': 100,
 	'thousand': 1000,
+	'million': 1000000,
 }
 
 
