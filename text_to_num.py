@@ -87,4 +87,6 @@ def text_to_num(text: str) -> int:
 				state = State.MULT
 			else:
 				raise ValueError('unexpected word')
+		else:
+			raise ValueError('unexpected state')
 	return result
