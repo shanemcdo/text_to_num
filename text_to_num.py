@@ -71,7 +71,7 @@ def text_to_num(text: str) -> int:
 				raise ValueError('unexpected word')
 		elif state == State.ONES:
 			if word in ones_table or word in tens_table:
-				raise ValueError('Malformed number')
+				raise ValueError('Malformed number: a ones or tens places cannot follow a ones places')
 			elif word in multiplier_table:
 				prev_mult = multiplier_table[word]
 				result *= prev_mult
@@ -83,7 +83,7 @@ def text_to_num(text: str) -> int:
 				result += ones_table[word]
 				state = State.ONES
 			elif word in tens_table:
-				raise ValueError('Malformed number')
+				raise ValueError('Malformed number: a tens place (twenty) cannot follow another tens place')
 			elif word in multiplier_table:
 				prev_mult = multiplier_table[word]
 				result *= prev_mult
@@ -100,7 +100,7 @@ def text_to_num(text: str) -> int:
 			elif word in multiplier_table:
 				mult = multiplier_table[word]
 				if prev_mult > mult:
-					raise ValueError('Malformed number')
+					raise ValueError('Malformed number: multipliers (e.g.) hundred cannot be bigger than the previous mulitplier')
 				prev_mult = mult
 				result *= prev_mult
 			else:
