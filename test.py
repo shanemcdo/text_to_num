@@ -48,5 +48,30 @@ class TextToNumTest(unittest.TestCase):
 		self.assertEqual(text_to_num('seventy'), 70)
 		self.assertEqual(text_to_num('eighty'), 80)
 		self.assertEqual(text_to_num('ninety'), 90)
+
+	def test_21to99(self):
+		for i, tens in enumerate((
+			'twenty',
+			'thirty',
+			'fourty',
+			'fifty',
+			'sixty',
+			'seventy',
+			'eighty',
+			'ninety',
+		), 2):
+			for j, ones in enumerate((
+				'one',
+				'two',
+				'three',
+				'four',
+				'five',
+				'six',
+				'seven',
+				'eight',
+				'nine',
+			), 1):
+				self.assertEqual(text_to_num(f'{tens} {ones}'), i * 10 + j)
+
 if __name__ == '__main__':
 	unittest.main()
