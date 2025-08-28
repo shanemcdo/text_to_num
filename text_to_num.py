@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-text_num_table = {
+from enum import Enum
+
+ones_table = {
 	'zero': 0,
 	'one': 1,
 	'two': 2,
@@ -21,6 +23,9 @@ text_num_table = {
 	'seventeen': 17,
 	'eighteen': 18,
 	'nineteen': 19,
+}
+
+tens_table = {
 	'twenty': 20,
 	'thirty': 30,
 	'fourty': 40,
@@ -31,6 +36,12 @@ text_num_table = {
 	'ninety': 90,
 }
 
+
+class State(Enum):
+	START = 1
+	ONES = 2
+	TENS = 3
+
 def text_to_num(text: str) -> int:
 	'''
 	:text: the number to be converted into an integer in plain english
@@ -40,6 +51,22 @@ def text_to_num(text: str) -> int:
 	:return: the number represented by the text
 	'''
 	result = 0
+	state = State.START
 	for word in text.lower().split():
-		result += text_num_table[word]
+		if state == State.START:
+			if word in ones_table:
+				result = ones_table[word]
+				state = State.ONES
+			elif word in tens_table:
+				result = tens_table[word]
+				state = State.TENS
+		elif state == State.ONES:
+			if word in ones_table or word in tens_table:
+				raise ValueError('Malformed number')
+		elif state == State.TENS:
+			if word in ones_table:
+				result += ones_table[word]
+				state = State.ONES
+			elif word in tens_table:
+				raise ValueError('Malformed number')
 	return result
