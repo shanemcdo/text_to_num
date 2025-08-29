@@ -232,5 +232,48 @@ class TextToNumTest(unittest.TestCase):
 	def test_and(self):
 		self.assertEqual(text_to_num('one million and one hundred and one thousand and one hundred and one'), 1101101)
 
+	def test_billions(self):
+		self.assertEqual(text_to_num('one billion'), 1000000000)
+		self.assertEqual(text_to_num('two billion'), 2000000000)
+		self.assertEqual(text_to_num('three billion'), 3000000000)
+		self.assertEqual(text_to_num('four billion'), 4000000000)
+		self.assertEqual(text_to_num('five billion'), 5000000000)
+		self.assertEqual(text_to_num('six billion'), 6000000000)
+		self.assertEqual(text_to_num('seven billion'), 7000000000)
+		self.assertEqual(text_to_num('eight billion'), 8000000000)
+		self.assertEqual(text_to_num('nine billion'), 9000000000)
+		self.assertEqual(text_to_num('ten billion'), 10000000000)
+		self.assertEqual(text_to_num('eleven billion'), 11000000000)
+		self.assertEqual(text_to_num('twelve billion'), 12000000000)
+		self.assertEqual(text_to_num('thirteen billion'), 13000000000)
+		self.assertEqual(text_to_num('fourteen billion'), 14000000000)
+		self.assertEqual(text_to_num('fifteen billion'), 15000000000)
+		self.assertEqual(text_to_num('sixteen billion'), 16000000000)
+		self.assertEqual(text_to_num('seventeen billion'), 17000000000)
+		self.assertEqual(text_to_num('eighteen billion'), 18000000000)
+		self.assertEqual(text_to_num('nineteen billion'), 19000000000)
+		for i, tens in enumerate((
+			'twenty',
+			'thirty',
+			'fourty',
+			'fifty',
+			'sixty',
+			'seventy',
+			'eighty',
+			'ninety',
+		), 2):
+			for j, ones in enumerate((
+				'one',
+				'two',
+				'three',
+				'four',
+				'five',
+				'six',
+				'seven',
+				'eight',
+				'nine',
+			), 1):
+				self.assertEqual(text_to_num(f'{tens} {ones} billion'), (i * 10 + j) * 1000000000)
+
 if __name__ == '__main__':
 	unittest.main()
