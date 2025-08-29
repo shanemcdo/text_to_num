@@ -36,8 +36,11 @@ tens_table = {
 	'ninety': 90,
 }
 
-multiplier_table = {
+hundred_table = {
 	'hundred': 100,
+}
+
+multiplier_table = {
 	'thousand': 1000,
 	'million': 1000000,
 }
@@ -47,7 +50,8 @@ class State(Enum):
 	START = 1
 	ONES = 2
 	TENS = 3
-	MULT = 4
+	HUNDRED = 4
+	MULT = 5
 
 def text_to_num(text: str) -> int:
 	'''
@@ -70,7 +74,7 @@ def text_to_num(text: str) -> int:
 				sub_result = tens_table[word]
 				state = State.TENS
 			else:
-				raise ValueError('unexpected word')
+				raise ValueError(f'unexpected word "{word}"')
 		elif state == State.ONES:
 			if word in ones_table or word in tens_table:
 				raise ValueError('Malformed number: a ones or tens places cannot follow a ones places')
@@ -80,8 +84,11 @@ def text_to_num(text: str) -> int:
 				state = State.MULT
 				result += sub_result
 				sub_result = 0
+			elif word in hundred_table:
+				sub_result *= hundred_table[word]
+				state = State.HUNDRED
 			else:
-				raise ValueError('unexpected word')
+				raise ValueError(f'unexpected word "{word}"')
 		elif state == State.TENS:
 			if word in ones_table:
 				sub_result += ones_table[word]
@@ -94,8 +101,28 @@ def text_to_num(text: str) -> int:
 				state = State.MULT
 				result += sub_result
 				sub_result = 0
+			elif word in hundred_table:
+				sub_result *= hundred_table[word]
+				state = State.HUNDRED
 			else:
-				raise ValueError('unexpected word')
+				raise ValueError(f'unexpected word "{word}"')
+		elif state == State.HUNDRED:
+			if word in ones_table:
+				sub_result += ones_table[word]
+				state = State.ONES
+			elif word in tens_table:
+				sub_result += tens_table[word]
+				state = State.TENS
+			elif word in multiplier_table:
+				prev_mult = multiplier_table[word]
+				sub_result *= prev_mult
+				state = State.MULT
+				result += sub_result
+				sub_result = 0
+			elif word == 'and':
+				continue
+			else:
+				raise ValueError(f'unexpected word "{word}"')
 		elif state == State.MULT:
 			if word in ones_table:
 				sub_result += ones_table[word]
@@ -112,7 +139,7 @@ def text_to_num(text: str) -> int:
 			elif word == 'and':
 				continue
 			else:
-				raise ValueError('unexpected word')
+				raise ValueError(f'unexpected word "{word}"')
 		else:
 			raise ValueError('unexpected state')
 	result += sub_result
