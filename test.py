@@ -275,5 +275,48 @@ class TextToNumTest(unittest.TestCase):
 			), 1):
 				self.assertEqual(text_to_num(f'{tens} {ones} billion'), (i * 10 + j) * 1000000000)
 
+	def test_trillions(self):
+		self.assertEqual(text_to_num('one trillion'), 1000000000000)
+		self.assertEqual(text_to_num('two trillion'), 2000000000000)
+		self.assertEqual(text_to_num('three trillion'), 3000000000000)
+		self.assertEqual(text_to_num('four trillion'), 4000000000000)
+		self.assertEqual(text_to_num('five trillion'), 5000000000000)
+		self.assertEqual(text_to_num('six trillion'), 6000000000000)
+		self.assertEqual(text_to_num('seven trillion'), 7000000000000)
+		self.assertEqual(text_to_num('eight trillion'), 8000000000000)
+		self.assertEqual(text_to_num('nine trillion'), 9000000000000)
+		self.assertEqual(text_to_num('ten trillion'), 10000000000000)
+		self.assertEqual(text_to_num('eleven trillion'), 11000000000000)
+		self.assertEqual(text_to_num('twelve trillion'), 12000000000000)
+		self.assertEqual(text_to_num('thirteen trillion'), 13000000000000)
+		self.assertEqual(text_to_num('fourteen trillion'), 14000000000000)
+		self.assertEqual(text_to_num('fifteen trillion'), 15000000000000)
+		self.assertEqual(text_to_num('sixteen trillion'), 16000000000000)
+		self.assertEqual(text_to_num('seventeen trillion'), 17000000000000)
+		self.assertEqual(text_to_num('eighteen trillion'), 18000000000000)
+		self.assertEqual(text_to_num('nineteen trillion'), 19000000000000)
+		for i, tens in enumerate((
+			'twenty',
+			'thirty',
+			'fourty',
+			'fifty',
+			'sixty',
+			'seventy',
+			'eighty',
+			'ninety',
+		), 2):
+			for j, ones in enumerate((
+				'one',
+				'two',
+				'three',
+				'four',
+				'five',
+				'six',
+				'seven',
+				'eight',
+				'nine',
+			), 1):
+				self.assertEqual(text_to_num(f'{tens} {ones} trillion'), (i * 10 + j) * 1000000000000)
+
 if __name__ == '__main__':
 	unittest.main()
